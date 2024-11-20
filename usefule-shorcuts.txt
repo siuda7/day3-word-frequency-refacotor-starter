@@ -1,0 +1,5 @@
+ctrl + alt + N // Inline
+ctrl + alt + M // Extract method
+ctrl + alt + V // Extract variable
+ctrl + alt + C // Extract constants
+shift F6 // Rename
