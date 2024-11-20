@@ -1,10 +1,6 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-//todo
-// useless code, import, if else
-// extract method in getResult
-// temp field? inputList = list
 public class WordFrequencyGame {
 
     public static final String SPACE = "\\s+";
