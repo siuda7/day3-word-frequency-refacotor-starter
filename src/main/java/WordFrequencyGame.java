@@ -1,7 +1,6 @@
 import java.util.*;
 
 //todo
-// reformat, empty space
 // useless code, import, if else
 // rename, getResult, input, arr exception msg
 // stream instead of for loop
@@ -10,16 +9,16 @@ import java.util.*;
 // temp field? inputList = list
 // remove unused import
 public class WordFrequencyGame {
-    public String getResult(String inputStr) {
-        if (inputStr.split("\\s+").length == 1) {
-            return inputStr + " 1";
+    public String getWordFrequency(String sentence) {
+        if (sentence.split("\\s+").length == 1) {
+            return sentence + " 1";
         } else {
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split("\\s+");
+                String[] words = sentence.split("\\s+");
                 List<Input> inputList = new ArrayList<>();
-                for (String s : arr) {
-                    Input input = new Input(s, 1);
+                for (String word : words) {
+                    Input input = new Input(word, 1);
                     inputList.add(input);
                 }
                 //get the map for the next step of sizing the same word
