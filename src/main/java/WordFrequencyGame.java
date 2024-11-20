@@ -39,18 +39,8 @@ public class WordFrequencyGame {
     }
 
     private Map<String, List<WordFrequency>> getWordFrequencyMap(List<WordFrequency> wordFrequencyList) {
-        Map<String, List<WordFrequency>> wordFrequncyMap = new HashMap<>();
-        for (WordFrequency wordFrequency : wordFrequencyList) {
-//       wordFrequncyMap.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!wordFrequncyMap.containsKey(wordFrequency.getWord())) {
-                ArrayList wordFrequncyList = new ArrayList<>();
-                wordFrequncyList.add(wordFrequency);
-                wordFrequncyMap.put(wordFrequency.getWord(), wordFrequncyList);
-            } else {
-                wordFrequncyMap.get(wordFrequency.getWord()).add(wordFrequency);
-            }
-        }
-        return wordFrequncyMap;
+        return wordFrequencyList.stream()
+                .collect(Collectors.groupingBy(WordFrequency::getWord));
     }
 
 
