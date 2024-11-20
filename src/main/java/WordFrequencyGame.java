@@ -29,13 +29,9 @@ public class WordFrequencyGame {
                         .collect(Collectors.toList());
                 wordFrequencyListTemp = wordFrequencyListTemp;
                 wordFrequencyListTemp.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
-                StringJoiner wordFrequencyJoiner = new StringJoiner(LINE_BREAK);
-
-                for (WordFrequency wordFrequency : wordFrequencyListTemp) {
-                    String wordFrequencyString = wordFrequency.getWord() + " " + wordFrequency.getWordCount();
-                    wordFrequencyJoiner.add(wordFrequencyString);
-                }
-                return wordFrequencyJoiner.toString();
+                return wordFrequencyListTemp.stream()
+                        .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
+                        .collect(Collectors.joining(LINE_BREAK));
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
