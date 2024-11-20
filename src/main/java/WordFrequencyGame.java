@@ -3,19 +3,25 @@ import java.util.*;
 //todo
 // useless code, import, if else
 // rename, getResult, input, arr exception msg
+// magic string
 // stream instead of for loop
 // extract method in getResult
 // use constant for string e.g "\\s" regex string
 // temp field? inputList = list
 // remove unused import
 public class WordFrequencyGame {
+
+    public static final String SPACE = "\\s+";
+    public static final String LINE_BREAK = "\n";
+    public static final String CALCULATE_ERROR = "Calculate Error";
+
     public String getWordFrequency(String sentence) {
-        if (sentence.split("\\s+").length == 1) {
+        if (sentence.split(SPACE).length == 1) {
             return sentence + " 1";
         } else {
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] words = sentence.split("\\s+");
+                String[] words = sentence.split(SPACE);
                 List<WordFrequency> wordFrequencyList = new ArrayList<>();
                 for (String word : words) {
                     WordFrequency wordFrequency = new WordFrequency(word, 1);
@@ -30,14 +36,14 @@ public class WordFrequencyGame {
                 }
                 wordFrequencyListTemp = wordFrequencyListTemp;
                 wordFrequencyListTemp.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
-                StringJoiner wordFrequencyJoiner = new StringJoiner("\n");
+                StringJoiner wordFrequencyJoiner = new StringJoiner(LINE_BREAK);
                 for (WordFrequency wordFrequency : wordFrequencyListTemp) {
                     String wordFrequencyString = wordFrequency.getWord() + " " + wordFrequency.getWordCount();
                     wordFrequencyJoiner.add(wordFrequencyString);
                 }
                 return wordFrequencyJoiner.toString();
             } catch (Exception e) {
-                return "Calculate Error";
+                return CALCULATE_ERROR;
             }
         }
     }
