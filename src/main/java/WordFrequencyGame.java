@@ -20,22 +20,35 @@ public class WordFrequencyGame {
         } else {
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] words = sentence.split(SPACE);
-                List<WordFrequency> wordFrequencyList = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
+                List<WordFrequency> wordFrequencyList = getInitialWordFrequencies(sentence);
                 //get the wordToWordfrequenciesMap for the next step of sizing the same word
-                Map<String, List<WordFrequency>> wordToWordfrequenciesMap = getWordFrequencyMap(wordFrequencyList);
-                List<WordFrequency> wordFrequencyListTemp = wordToWordfrequenciesMap.entrySet().stream()
-                        .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                        .collect(Collectors.toList());
-                wordFrequencyListTemp = wordFrequencyListTemp;
-                wordFrequencyListTemp.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
-                return wordFrequencyListTemp.stream()
-                        .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
-                        .collect(Collectors.joining(LINE_BREAK));
+                List<WordFrequency> wordFrequencyListTemp = getWordFrequencies(wordFrequencyList);
+                return joinResult(wordFrequencyListTemp);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
+    }
+
+    private static String joinResult(List<WordFrequency> wordFrequencyListTemp) {
+        wordFrequencyListTemp = wordFrequencyListTemp;
+        wordFrequencyListTemp.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
+        return wordFrequencyListTemp.stream()
+                .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
+                .collect(Collectors.joining(LINE_BREAK));
+    }
+
+    private List<WordFrequency> getWordFrequencies(List<WordFrequency> wordFrequencyList) {
+        Map<String, List<WordFrequency>> wordToWordfrequenciesMap = getWordFrequencyMap(wordFrequencyList);
+        return wordToWordfrequenciesMap.entrySet().stream()
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).collect(Collectors.toList());
+    }
+
+    private static List<WordFrequency> getInitialWordFrequencies(String sentence) {
+        String[] words = sentence.split(SPACE);
+        return Arrays.stream(words)
+                .map(word -> new WordFrequency(word, 1))
+                .toList();
     }
 
     private Map<String, List<WordFrequency>> getWordFrequencyMap(List<WordFrequency> wordFrequencyList) {
