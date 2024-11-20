@@ -15,9 +15,7 @@ public class WordFrequencyGame {
     public String getWordFrequency(String sentence) {
         if (sentence.split(SPACE).length == 1) return sentence + ONE;
         try {
-            //split the input string with 1 to n pieces of spaces
             List<WordFrequency> wordFrequencyList = getInitialWordFrequencies(sentence);
-            //get the wordToWordfrequenciesMap for the next step of sizing the same word
             List<WordFrequency> wordFrequencyListTemp = getWordFrequencies(wordFrequencyList);
             return joinWordFrequencyResults(wordFrequencyListTemp);
         } catch (Exception e) {
