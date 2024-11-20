@@ -1,9 +1,8 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 //todo
 // useless code, import, if else
-// rename, getResult, input, arr exception msg
-// magic string
 // stream instead of for loop
 // extract method in getResult
 // use constant for string e.g "\\s" regex string
@@ -22,11 +21,7 @@ public class WordFrequencyGame {
             try {
                 //split the input string with 1 to n pieces of spaces
                 String[] words = sentence.split(SPACE);
-                List<WordFrequency> wordFrequencyList = new ArrayList<>();
-                for (String word : words) {
-                    WordFrequency wordFrequency = new WordFrequency(word, 1);
-                    wordFrequencyList.add(wordFrequency);
-                }
+                List<WordFrequency> wordFrequencyList = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
                 //get the wordToWordfrequenciesMap for the next step of sizing the same word
                 Map<String, List<WordFrequency>> wordToWordfrequenciesMap = getWordFrequencyMap(wordFrequencyList);
                 List<WordFrequency> wordFrequencyListTemp = new ArrayList<>();
