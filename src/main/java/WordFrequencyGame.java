@@ -23,15 +23,14 @@ public class WordFrequencyGame {
                 List<WordFrequency> wordFrequencyList = getInitialWordFrequencies(sentence);
                 //get the wordToWordfrequenciesMap for the next step of sizing the same word
                 List<WordFrequency> wordFrequencyListTemp = getWordFrequencies(wordFrequencyList);
-                return joinResult(wordFrequencyListTemp);
+                return joinWordFrequencyResults(wordFrequencyListTemp);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
     }
 
-    private static String joinResult(List<WordFrequency> wordFrequencyListTemp) {
-        wordFrequencyListTemp = wordFrequencyListTemp;
+    private static String joinWordFrequencyResults(List<WordFrequency> wordFrequencyListTemp) {
         wordFrequencyListTemp.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
         return wordFrequencyListTemp.stream()
                 .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
@@ -41,7 +40,8 @@ public class WordFrequencyGame {
     private List<WordFrequency> getWordFrequencies(List<WordFrequency> wordFrequencyList) {
         Map<String, List<WordFrequency>> wordToWordfrequenciesMap = getWordFrequencyMap(wordFrequencyList);
         return wordToWordfrequenciesMap.entrySet().stream()
-                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).collect(Collectors.toList());
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
+                .collect(Collectors.toList());
     }
 
     private static List<WordFrequency> getInitialWordFrequencies(String sentence) {
